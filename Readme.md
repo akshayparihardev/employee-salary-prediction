@@ -34,15 +34,19 @@ This project provides an end-to-end solution for predicting whether an individua
 
 Follow these steps to get the project up and running on your local machine.
 
-1. Clone the repo 📥  
+1. **Clone the repo** 📥
+   ```bash 
    git clone https://github.com/akshayparihardev/employee-salary-prediction.git
-
-2. Move into the project directory 📁
+   ```
+3. **Move into the project directory** 📁
+   ```bash
    cd employee-salary-prediction
-
-3. Install dependencies ⚙️  
+   ```
+5. **Install dependencies** ⚙️  
    _(It's recommended to use a virtual environment)_  
+   ```bash
    pip install -r requirements.txt
+   ```
 
 ### 💡 Usage
 
