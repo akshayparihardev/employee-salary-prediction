@@ -65,7 +65,7 @@ The project evaluates five different classification models to find the most effe
 ### ❤️ Streamlit App UI
 
 <img width="1920" height="874" alt="Screenshot (696)" src="https://github.com/user-attachments/assets/572709d0-55a9-45ed-8a26-0db3fe6306bf" />
-
+<hr>
 <img width="1920" height="870" alt="Screenshot (697)" src="https://github.com/user-attachments/assets/78f54e36-bfc3-4942-99c6-b6745f98a500" />
 
 
