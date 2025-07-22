@@ -59,6 +59,7 @@ This project is designed for maximum convenience. You can launch the interactive
 ### 📈 Model Performance
 
 The project evaluates five different classification models to find the most effective one. The Gradient Boosting model was chosen for its superior performance, as summarized below.
+
 <img width="1413" height="525" alt="newplot" src="https://github.com/user-attachments/assets/2cb02875-90f1-48af-856f-076b47a1e37a" />
 
 
