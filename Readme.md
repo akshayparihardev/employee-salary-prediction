@@ -3,7 +3,7 @@
 ### 📚 About
 
 This project provides an end-to-end solution for predicting whether an individual's annual income exceeds $50K. It showcases a complete machine learning workflow, starting from comprehensive data preprocessing and rigorous model evaluation to deployment as a fully interactive web application. The goal is to build a reliable and accessible tool for income prediction.
-
+<hr>
 ### ✨ Features
 
 - **Interactive Web App 🌐:** A user-friendly interface built with Streamlit that allows for:
