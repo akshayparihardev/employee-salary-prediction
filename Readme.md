@@ -20,6 +20,7 @@ This project provides an end-to-end solution for predicting whether an individua
   - Includes interactive visualizations to easily identify the best-performing model.
 
 - **Deployment Ready 📦:** All essential assets, including the trained model, scaler, and encoders, are saved for easy reuse and deployment.
+  <hr>
 
 ### 🛠️ Tech Stack
 
@@ -30,6 +31,8 @@ This project provides an end-to-end solution for predicting whether an individua
 - 📊 Visualization: Plotly Express
 - 📓 Environment: Jupyter Notebook
 - 🔗 Deployment Tunneling: ngrok
+
+<hr>
 
 ### 🚀 Installation
 
@@ -49,6 +52,8 @@ Follow these steps to get the project up and running on your local machine.
    pip install -r requirements.txt
    ```
 
+<hr>
+
 ### 💡 Usage
 
 This project is designed for maximum convenience. You can launch the interactive web application directly from the Jupyter Notebook.
@@ -56,6 +61,8 @@ This project is designed for maximum convenience. You can launch the interactive
 - Open the Notebook 📓: Launch the `Employee_Salary_Prediction_App.ipynb` file.
 - Run All Cells 🚀: Simply run all the cells from top to bottom.
 - Click the ngrok Link ✨: The final cell will automatically start the Streamlit application and output a public ngrok URL. Click this link to open the live web app in your browser.
+
+<hr>
 
 ### 📈 Model Performance
 
@@ -69,6 +76,7 @@ The project evaluates five different classification models to find the most effe
 <hr>
 <img width="1920" height="870" alt="Screenshot (697)" src="https://github.com/user-attachments/assets/78f54e36-bfc3-4942-99c6-b6745f98a500" />
 
+<hr>
 
 ### 🙏 Acknowledgements
 
