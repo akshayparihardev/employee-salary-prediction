@@ -7,8 +7,8 @@ This project provides an end-to-end solution for predicting whether an individua
 
 ### 🚀 Live Demo
 
-<a href="https://employee-salary-prediction-esp.streamlit.app/" target="_blank">
-  <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg" alt="Streamlit App" style="height: 40px;">
+<a href="https://employee-salary-prediction-esp.streamlit.app/" target="blank">
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=black" alt="Streamlit App" style="height: 40px;">
 </a>
 
 **Click Above 👆 to Open the Live Web App**
