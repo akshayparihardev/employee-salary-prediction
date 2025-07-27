@@ -181,7 +181,17 @@ if model:
         batch_data_raw['Confidence'] = [f"{prob.max()*100:.2f}%" for prob in batch_proba]
 
         st.success("✅ Batch predictions complete!")
-        st.dataframe(batch_data_raw)
+
+        # --- ADD THESE LINES ---
+        st.subheader("Prediction Results")
+        st.info("💡 The original data is shown below with two new columns added on the far right:")
+        st.markdown("""
+        * **Predicted_Income**: The model's prediction (`>50K` or `<=50K`).
+        * **Confidence**: The model's confidence in that prediction.
+        """)
+        # ----------------------
+
+        st.dataframe(batch_data_raw) # This line was already there
 
         csv = batch_data_raw.to_csv(index=False).encode('utf-8')
         st.download_button(label="Download Predictions CSV", data=csv, file_name='predicted_incomes.csv', mime='text/csv')
