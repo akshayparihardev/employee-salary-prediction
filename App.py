@@ -191,7 +191,25 @@ if model:
         """)
         # ----------------------
 
-        st.dataframe(batch_data_raw) # This line was already there
+        # This is the NEW and IMPROVED code
+
+    # 1. Define a function to style the columns
+        def highlight_prediction_columns(s):
+            """
+            Applies bold, colored styling to the prediction columns.
+            You can change 'green' to 'darkcyan', '#28a745', or any color you like.
+            """
+            color = 'green' 
+            return [f'color: {color}; font-weight: bold' for v in s]
+
+# 2. Apply the styling to your results dataframe for the specific columns
+        styled_results = batch_data_raw.style.apply(
+    highlight_prediction_columns, 
+    subset=['Predicted_Income', 'Confidence']
+)
+
+# 3. Display the STYLED dataframe instead of the original one
+        st.dataframe(styled_results)
 
         csv = batch_data_raw.to_csv(index=False).encode('utf-8')
         st.download_button(label="Download Predictions CSV", data=csv, file_name='predicted_incomes.csv', mime='text/csv')
