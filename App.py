@@ -204,9 +204,9 @@ if model:
 
 # 2. Apply the styling to your results dataframe for the specific columns
         styled_results = batch_data_raw.style.apply(
-    highlight_prediction_columns, 
-    subset=['Predicted_Income', 'Confidence']
-)
+            highlight_prediction_columns, 
+            subset=['Predicted_Income', 'Confidence']
+        )
 
 # 3. Display the STYLED dataframe instead of the original one
         st.dataframe(styled_results)
