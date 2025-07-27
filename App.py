@@ -396,32 +396,33 @@ if model:
 
         st.success("✅ Batch predictions complete!")
 
-        # --- ADD THESE LINES ---
         st.subheader("Prediction Results")
         st.info("💡 The original data is shown below with two new columns added on the far right:")
         st.markdown("""
         * **Predicted_Income**: The model's prediction (`>50K` or `<=50K`).
         * **Confidence**: The model's confidence in that prediction.
         """)
-        # ----------------------
 
-        # 1. Define a function to style the columns
-        def highlight_prediction_columns(s):
+        # --- CODE TO STYLE AND DISPLAY THE RESULTS TABLE ---
+        # 1. Define a function that returns an HTML span tag with styling
+        def color_text(val):
             """
             Applies bold, colored styling to the prediction columns.
-            You can change 'green' to any color you like.
+            You can change 'green' to any other CSS color.
             """
-            color = 'green' 
-            return [f'color: {color}; font-weight: bold' for v in s]
+            color = 'green'
+            return f'<span style="color: {color}; font-weight: bold;">{val}</span>'
 
-        # 2. Apply the styling to your results dataframe for the specific columns
-        styled_results = batch_data_raw.style.apply(
-            highlight_prediction_columns, 
-            subset=['Predicted_Income', 'Confidence']
+        # 2. Use the 'format' method to apply the style and convert to HTML
+        #    'escape=False' is needed to render the HTML tags
+        html_table = batch_data_raw.to_html(
+            formatters={'Predicted_Income': color_text, 'Confidence': color_text},
+            escape=False,
+            index=False # This prevents the pandas index from being shown
         )
 
-        # 3. Display the STYLED dataframe instead of the original one
-        st.dataframe(styled_results)
+        # 3. Display the HTML table using st.markdown
+        st.markdown(html_table, unsafe_allow_html=True)
 
         csv = batch_data_raw.to_csv(index=False).encode('utf-8')
         st.download_button(label="Download Predictions CSV", data=csv, file_name='predicted_incomes.csv', mime='text/csv')
