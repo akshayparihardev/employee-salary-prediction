@@ -618,9 +618,9 @@ if model:
         st.subheader("📊 Prediction Insights")
         st.info("💡 Your results are ready! We've added two new columns to your data, highlighted in green on the far right.")
         st.markdown("""
-        - **Predicted_Income: The model's prediction (>50K or <=50K).
-        - **Confidence: The model's confidence in the prediction.
-        
+        - **Predicted_Income**: The model's prediction (`>50K` or `<=50K`).
+        - **Confidence**: The model's confidence in the prediction.
+
         Use the page selector below to navigate through the results.
         """)
 
