@@ -312,7 +312,7 @@ def load_assets():
         st.sidebar.success("Model and components loaded!")
         return model, scaler, label_encoders, training_columns
     except FileNotFoundError:
-        st.sidebar.error("Error: Model assets not found. Please run the 'Train and Save Model Assets' cell in your notebook first.")
+        st.sidebar.error("Error: Model assets not found. Please ensure the 'models' folder is in the same directory as app.py.")
         return None, None, None, None
 
 model, scaler, label_encoders, training_columns = load_assets()
@@ -349,8 +349,6 @@ if model:
 
     if st.sidebar.button("Predict Income 🚀"):
         user_input_df = pd.DataFrame([{'age': age, 'workclass': workclass, 'fnlwgt': fnlwgt, 'education-num': educational_num, 'marital-status': marital_status, 'occupation': occupation, 'relationship': relationship, 'race': race, 'gender': gender, 'capital-gain': capital_gain, 'capital-loss': capital_loss, 'hours-per-week': hours_per_week, 'native-country': native_country}])
-
-        # One-hot encode the user input to match the training data structure
         user_input_encoded = pd.get_dummies(user_input_df).reindex(columns=training_columns, fill_value=0)
 
         prediction = model.predict(user_input_encoded)
@@ -375,6 +373,7 @@ if model:
         st.write("Uploaded data preview:")
         st.dataframe(batch_data_raw.head())
 
+        # --- PREDICTION LOGIC (on the full file) ---
         batch_data = batch_data_raw.copy()
         if 'education' in batch_data.columns:
             batch_data = batch_data.drop('education', axis=1)
@@ -390,39 +389,43 @@ if model:
             batch_preds = model.predict(batch_encoded)
             batch_proba = model.predict_proba(batch_encoded)
 
+        # Add predictions to the original full dataframe
         predicted_labels = label_encoders['income'].inverse_transform(batch_preds)
         batch_data_raw['Predicted_Income'] = predicted_labels
         batch_data_raw['Confidence'] = [f"{prob.max()*100:.2f}%" for prob in batch_proba]
 
         st.success("✅ Batch predictions complete!")
 
+        # --- UX MESSAGES AND STYLED PREVIEW ---
         st.subheader("Prediction Results")
-        st.info("💡 The original data is shown below with two new columns added on the far right:")
+        st.info("💡 Displaying a preview of the first 100 results with highlighted predictions. Use the download button for the full file.")
         st.markdown("""
         * **Predicted_Income**: The model's prediction (`>50K` or `<=50K`).
         * **Confidence**: The model's confidence in that prediction.
         """)
 
-        # --- CODE TO STYLE AND DISPLAY THE RESULTS TABLE ---
-        # 1. Define a function that returns an HTML span tag with styling
-        def color_text(val):
-            """
-            Applies bold, colored styling to the prediction columns.
-            You can change 'green' to any other CSS color.
-            """
-            color = 'green'
-            return f'<span style="color: {color}; font-weight: bold;">{val}</span>'
+        # 1. Create a smaller preview dataframe
+        preview_df = batch_data_raw.head(100)
 
-        # 2. Use the 'format' method to apply the style and convert to HTML
-        #    'escape=False' is needed to render the HTML tags
-        html_table = batch_data_raw.to_html(
-            formatters={'Predicted_Income': color_text, 'Confidence': color_text},
-            escape=False,
-            index=False # This prevents the pandas index from being shown
+        # 2. Define the styling function
+        def highlight_prediction_columns(s):
+            color = 'green'
+            return [f'color: {color}; font-weight: bold' for v in s]
+
+        # 3. Apply styling ONLY to the small preview dataframe
+        styled_preview = preview_df.style.apply(
+            highlight_prediction_columns,
+            subset=['Predicted_Income', 'Confidence']
         )
 
-        # 3. Display the HTML table using st.markdown
-        st.markdown(html_table, unsafe_allow_html=True)
+        # 4. Display the fast, styled preview
+        st.dataframe(styled_preview)
 
+        # --- DOWNLOAD BUTTON (for the full file) ---
         csv = batch_data_raw.to_csv(index=False).encode('utf-8')
-        st.download_button(label="Download Predictions CSV", data=csv, file_name='predicted_incomes.csv', mime='text/csv')
+        st.download_button(
+            label="Download Full Predictions CSV",
+            data=csv,
+            file_name='predicted_incomes.csv',
+            mime='text/csv'
+        )
