@@ -536,7 +536,7 @@ def load_assets():
 model, scaler, label_encoders, training_columns = load_assets()
 
 # --- Main App Interface ---
-st.title("Employee Income Prediction System 🧑‍�")
+st.title("Employee Income Prediction System 🧑‍💻")
 st.markdown("---")
 
 if model:
@@ -615,11 +615,13 @@ if model:
         st.success("✅ Batch predictions complete!")
 
         # --- UX MESSAGES ---
-        st.subheader("Prediction Results")
-        st.info("💡 Browse through the results using the page selector below. Use the download button for the full file.")
+        st.subheader("📊 Prediction Insights")
+        st.info("💡 Your results are ready! We've added two new columns to your data, highlighted in green on the far right.")
         st.markdown("""
-        * **Predicted_Income**: The model's prediction (`>50K` or `<=50K`).
-        * **Confidence**: The model's confidence in that prediction.
+        - **Predicted_Income**: The model's forecast for each employee's income category.
+        - **Confidence**: How certain the model is about its prediction.
+        
+        Use the page selector below to navigate through the results.
         """)
 
         # --- PAGINATION AND STYLING LOGIC ---
